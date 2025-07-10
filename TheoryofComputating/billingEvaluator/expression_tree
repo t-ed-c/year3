@@ -1,0 +1,5 @@
+digraph {
+	node0 [label="fetchTariff()"]
+	node1 [label="tariff ="]
+	node1 -> node0
+}

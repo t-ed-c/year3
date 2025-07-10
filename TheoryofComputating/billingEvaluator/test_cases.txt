@@ -1,0 +1,24 @@
+# Basic expression with assignment
+base = 100
+units = 60
+rate = 2.5
+total = base + (units * rate)
+
+# Ternary with discount logic
+discounted = (units < 100 ? total * 0.9 : total)
+
+# Boolean logic and penalty
+isLowIncome = false
+penalty = units > 100 && !isLowIncome ? 500 : 0
+
+# Update bill with penalty
+bill = total + penalty
+
+# Function call: tariff retrieval
+tariff = fetchTariff()
+
+# Forecasting usage
+forecastedBill = forecast(units)
+
+# Edge case: division by zero
+testDivide = 50 / 0
