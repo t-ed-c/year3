@@ -1,49 +1,34 @@
 import heapq
 import time
 
-# Task 1: Dijkstra using Adjacency List (without heap)
-def dijkstra_adj_list(n, graph, source):
+# Modified Dijkstra using Min-Heap that tracks the path
+def dijkstra_with_paths(n, graph, source):
     dist = [float('inf')] * n
+    parent = [-1] * n  # Track the path
     dist[source] = 0
-    visited = [False] * n
-
-    for _ in range(n):
-        # Find unvisited node with the smallest distance
-        u = -1
-        min_dist = float('inf')
-        for i in range(n):
-            if not visited[i] and dist[i] < min_dist:
-                u = i
-                min_dist = dist[i]
-
-        if u == -1:
-            break  # No reachable unvisited nodes left
-
-        visited[u] = True
-        for v, weight in graph[u]:
-            if not visited[v] and dist[u] + weight < dist[v]:
-                dist[v] = dist[u] + weight
-
-    return dist
-
-# Task 2: Dijkstra using Min-Heap (Priority Queue)
-def dijkstra_min_heap(n, graph, source):
-    dist = [float('inf')] * n
-    dist[source] = 0
-    pq = [(0, source)]  # Min-heap: (distance, node)
+    pq = [(0, source)]  # (distance, node)
 
     while pq:
         current_dist, u = heapq.heappop(pq)
 
         if current_dist > dist[u]:
-            continue  # Outdated entry
+            continue
 
         for v, weight in graph[u]:
             if dist[u] + weight < dist[v]:
                 dist[v] = dist[u] + weight
+                parent[v] = u
                 heapq.heappush(pq, (dist[v], v))
 
-    return dist
+    return dist, parent
+
+# Reconstruct path from source to target using parent array
+def get_path(parent, target):
+    path = []
+    while target != -1:
+        path.append(target)
+        target = parent[target]
+    return path[::-1]  # reverse to get source -> target
 
 # Input helper
 def take_input():
@@ -63,23 +48,21 @@ def take_input():
     source = int(input("\nEnter the source vertex: "))
     return n, graph, source
 
-# Experiment runner
+# Main experiment runner
 def run_experiment():
     n, graph, source = take_input()
 
-    print("\n--- Running Dijkstra with Adjacency List ---")
-    start1 = time.time()
-    dist_list = dijkstra_adj_list(n, graph, source)
-    end1 = time.time()
-    print("Shortest distances:", dist_list)
-    print(f"Execution Time: {end1 - start1:.6f} seconds")
+    print("\n--- Running Dijkstra with Path Output ---")
+    start = time.time()
+    dist, parent = dijkstra_with_paths(n, graph, source)
+    end = time.time()
 
-    print("\n--- Running Dijkstra with Min-Heap ---")
-    start2 = time.time()
-    dist_heap = dijkstra_min_heap(n, graph, source)
-    end2 = time.time()
-    print("Shortest distances:", dist_heap)
-    print(f"Execution Time: {end2 - start2:.6f} seconds")
+    print(f"\nShortest paths from source vertex {source}:")
+    for target in range(n):
+        path = get_path(parent, target)
+        print(f"Vertex {target}: Distance = {dist[target]}, Path = {' -> '.join(map(str, path))}")
+
+    print(f"\nExecution Time: {end - start:.6f} seconds")
 
 # Run the program
 run_experiment()
