@@ -1,5 +1,4 @@
-#we use backtracking to assign each guest to a table
-# such that no two guests who cannot sit together are at the same table
+#we use backtracking to assign each guest to a table such that no two guests who cannot sit together are at the same table
 def layout(N, C, L):
     from collections import defaultdict
 
