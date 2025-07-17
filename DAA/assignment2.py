@@ -103,3 +103,29 @@ def run_experiment():
 
 # ----------------- Main -----------------
 run_experiment()
+
+#Enter number of vertices: 4
+#Enter number of edges: 4
+
+#From node: 0
+#To node: 1
+#Weight: 1
+#From node: 0
+#To node: 2
+#Weight: 4
+#From node: 1
+#To node: 2
+#Weight: 2
+#From node: 1
+#To node: 3
+#Weight: 5
+
+#Enter the source vertex: 0
+
+#Shortest paths from source vertex 0:
+#Vertex 0: Distance = 0, Path = 0
+#Vertex 1: Distance = 1, Path = 0 -> 1
+#Vertex 2: Distance = 3, Path = 0 -> 1 -> 2
+#Vertex 3: Distance = 6, Path = 0 -> 1 -> 3
+
+#Execution Time: 0.000041 seconds
