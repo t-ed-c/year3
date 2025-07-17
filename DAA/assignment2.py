@@ -1,10 +1,36 @@
 import heapq
 import time
 
-# Modified Dijkstra using Min-Heap that tracks the path
-def dijkstra_with_paths(n, graph, source):
+# ----------------- Task 1: Dijkstra using Adjacency List -----------------
+def dijkstra_adj_list(n, graph, source):
     dist = [float('inf')] * n
-    parent = [-1] * n  # Track the path
+    parent = [-1] * n
+    visited = [False] * n
+    dist[source] = 0
+
+    for _ in range(n):
+        u = -1
+        min_dist = float('inf')
+        for i in range(n):
+            if not visited[i] and dist[i] < min_dist:
+                u = i
+                min_dist = dist[i]
+
+        if u == -1:
+            break  # No reachable node left
+
+        visited[u] = True
+        for v, weight in graph[u]:
+            if not visited[v] and dist[u] + weight < dist[v]:
+                dist[v] = dist[u] + weight
+                parent[v] = u
+
+    return dist, parent
+
+# ----------------- Task 2: Dijkstra using Min-Heap -----------------
+def dijkstra_min_heap(n, graph, source):
+    dist = [float('inf')] * n
+    parent = [-1] * n
     dist[source] = 0
     pq = [(0, source)]  # (distance, node)
 
@@ -22,47 +48,58 @@ def dijkstra_with_paths(n, graph, source):
 
     return dist, parent
 
-# Reconstruct path from source to target using parent array
+# ----------------- Helper: Reconstruct Path -----------------
 def get_path(parent, target):
     path = []
     while target != -1:
         path.append(target)
         target = parent[target]
-    return path[::-1]  # reverse to get source -> target
+    return path[::-1]
 
-# Input helper
+# ----------------- Helper: Take Input with Default Weight -----------------
 def take_input():
     n = int(input("Enter number of vertices: "))
     m = int(input("Enter number of edges: "))
     graph = [[] for _ in range(n)]
 
-    print("\nEnter the edges in format: u v weight")
+    print("\nEnter the edges:")
     for _ in range(m):
         u = int(input("  From node: "))
         v = int(input("  To node: "))
-        w = int(input(f"  Weight of edge ({u}, {v}): "))
+        w_input = input(f"  Weight of edge ({u}, {v}) [Press Enter for default weight 1]: ").strip()
+        w = int(w_input) if w_input else 1
         graph[u].append((v, w))
-        # Uncomment below if the graph is undirected
+        # Uncomment if the graph is undirected
         # graph[v].append((u, w))
 
     source = int(input("\nEnter the source vertex: "))
     return n, graph, source
 
-# Main experiment runner
+# ----------------- Run Both Tasks -----------------
 def run_experiment():
     n, graph, source = take_input()
 
-    print("\n--- Running Dijkstra with Path Output ---")
-    start = time.time()
-    dist, parent = dijkstra_with_paths(n, graph, source)
-    end = time.time()
+    # ----- Task 1: Adjacency List -----
+    print("\n--- Dijkstra Using Adjacency List ---")
+    start1 = time.time()
+    dist1, parent1 = dijkstra_adj_list(n, graph, source)
+    end1 = time.time()
 
-    print(f"\nShortest paths from source vertex {source}:")
-    for target in range(n):
-        path = get_path(parent, target)
-        print(f"Vertex {target}: Distance = {dist[target]}, Path = {' -> '.join(map(str, path))}")
+    for i in range(n):
+        path = get_path(parent1, i)
+        print(f"Vertex {i}: Distance = {dist1[i]}, Path = {' -> '.join(map(str, path))}")
+    print(f"Execution Time: {end1 - start1:.6f} seconds")
 
-    print(f"\nExecution Time: {end - start:.6f} seconds")
+    # ----- Task 2: Min-Heap -----
+    print("\n--- Dijkstra Using Min-Heap ---")
+    start2 = time.time()
+    dist2, parent2 = dijkstra_min_heap(n, graph, source)
+    end2 = time.time()
 
-# Run the program
+    for i in range(n):
+        path = get_path(parent2, i)
+        print(f"Vertex {i}: Distance = {dist2[i]}, Path = {' -> '.join(map(str, path))}")
+    print(f"Execution Time: {end2 - start2:.6f} seconds")
+
+# ----------------- Main -----------------
 run_experiment()
