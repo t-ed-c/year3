@@ -50,4 +50,4 @@ def layout(N, C, L):
         return False  # No valid arrangement is possible
 # Example usage
 print(layout(4, 2, [(0, 1), (1, 2), (2, 3)]))
-# Expected output: A valid mapping like {0: 0, 1: 1, 2: 0, 3: 1}
+# Expected output:
