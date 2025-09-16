@@ -1,0 +1,129 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Compiled Files
+*.o
+*.class
+*.pyc
+*.pyo
+__pycache__/
+*.so
+*.dll
+*.dylib
+
+# Language Specific
+# Java
+*.jar
+*.war
+*.ear
+target/
+build/
+
+# Python
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# C/C++
+*.exe
+*.out
+a.out
+
+# Android
+*.apk
+*.aab
+local.properties
+.gradle/
+build/
+captures/
+.externalNativeBuild/
+
+# iOS
+*.ipa
+xcuserdata/
+build/
+DerivedData/
+*.xcworkspace/xcuserdata/
+
+# Mobile Development
+.expo/
+.expo-shared/
+
+# Documentation
+*.aux
+*.log
+*.toc
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+
+# Large Media Files (consider using Git LFS)
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+*.mkv
+*.m4v
+*.3gp
+
+# Audio files
+*.wav
+*.mp3
+*.aac
+*.ogg
+*.wma
+*.flac
+
+# Image files (large ones)
+*.psd
+*.ai
+*.eps
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*.backup
+*~
+
+# Log Files
+*.log
+logs/
+
+# Database Files
+*.db
+*.sqlite
+*.sqlite3
