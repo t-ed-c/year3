@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Operating System Files
 .DS_Store
 .DS_Store?
@@ -127,3 +128,20 @@ logs/
 *.db
 *.sqlite
 *.sqlite3
+=======
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+>>>>>>> 81ad635 (Initial commit of mobile programming project)
